@@ -1,0 +1,39 @@
+body {
+    background-color: #fdf5e6;
+}
+h1 {
+    color: #b22222;
+    font-weight: bold;
+}
+.card {
+    border: 2px solid #b22222;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 23rem;
+    margin: 0 auto;
+}
+.card-title {
+    color: #b22222;
+    font-weight: bold;
+}
+.btn-primary {
+    background-color: #b22222;
+    border-color: #b22222;
+}
+.btn-primary:hover {
+    background-color: #8b0000;
+    border-color: #8b0000;
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+.row {
+    justify-content: center;
+}
+
+/* Hover sobre tarjetas */
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px rgba(178, 34, 34, 0.5);
+    border-color: #8b0000;
+}

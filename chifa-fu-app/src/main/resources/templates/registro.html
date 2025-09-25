@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org xmlns:sec="http://www.thymeleaf.org/extras/spring-security"">
+      <head>
+        <title>Registro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- CSS navbar-->
+        <link rel="stylesheet" th:href="@{/navbar.css}" />
+        <!-- CSS footer-->
+        <link rel="stylesheet" th:href="@{/footer.css}" />
+    </head>
+    <body>
+        <div th:replace="fragments/navbar :: navbar"></div>
+
+        <main>
+            <section class="vh-200" style="background-color: #fff7f0;">
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+                            <div class="card p-4 shadow-lg" style="border-radius: 1rem; border: 2px solid #ff9800;">
+                                <h3 class="mb-4 text-center" style="color: #ff9800;">Sé parte del Chifa</h3>
+
+                                <!--Si es exitoso-->
+                                <div th:if="${success}" class="alert alert-success alert-dismissible fade show"
+                                     role="alert">
+                                    <strong>Cuenta creada satisfactoriamente</strong>
+                                    <a class="ms-2" href="/login">Iniciar Sesión</a>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+
+                                <form th:object="${registroDto}" method="POST">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                    <input type="hidden" name="rol" th:value="'ADMIN'" />
+
+                                    <!-- Nombre -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="name" style="color: #ff9800;">Nombre</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-user" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="text" th:field="*{nombre}" class="form-control" placeholder="Ingrese su nombre" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('nombre')}" th:errorclass="text-danger" th:errors="*{nombre}"></p>
+                                    </div>
+
+                                    <!-- Apellido -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="apellido" style="color: #ff9800;">Apellido</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-user" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="text" th:field="*{apellido}" class="form-control" placeholder="Ingrese su apellido" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('apellido')}" th:errorclass="text-danger" th:errors="*{apellido}"></p>
+                                    </div>
+
+                                    <!-- DNI -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="dni" style="color: #ff9800;">DNI</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-id-card" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="text" th:field="*{dni}" class="form-control" placeholder="Ingrese su DNI" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('dni')}" th:errorclass="text-danger" th:errors="*{dni}"></p>
+                                    </div>
+
+                                    <!-- Teléfono -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="telefono" style="color: #ff9800;">Teléfono</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-phone" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="text" th:field="*{telefono}" class="form-control" placeholder="Ingrese su Teléfono" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('telefono')}" th:errorclass="text-danger" th:errors="*{telefono}"></p>
+                                    </div>
+
+                                    <!-- Dirección Predeterminada -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="direccionPredeterminada" style="color: #ff9800;">Dirección</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-map-marker-alt" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="text" th:field="*{direccionPredeterminada}" class="form-control" placeholder="Ingrese su Dirección" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('direccionPredeterminada')}" th:errorclass="text-danger" th:errors="*{direccionPredeterminada}"></p>
+                                    </div>
+
+                                    <!-- Correo Electrónico -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="email" style="color: #ff9800;">Correo Electrónico</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-envelope" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="email" th:field="*{email}" class="form-control" placeholder="Ingrese su email" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('email')}" th:errorclass="text-danger" th:errors="*{email}"></p>
+                                    </div>
+
+                                    <!-- Contraseña -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="contrasena" style="color: #ff9800;">Contraseña</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-lock" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="password" th:field="*{contrasena}" class="form-control" placeholder="Ingrese su contraseña" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('contrasena')}" th:errorclass="text-danger" th:errors="*{contrasena}"></p>
+                                    </div>
+
+                                    <!-- Confirmar Contraseña -->
+                                    <div class="mb-3">
+                                        <label class="form-label" for="confirmarContrasena" style="color: #ff9800;">Confirmar Contraseña</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" style="background-color: #fff3e0;">
+                                                <i class="fas fa-lock" style="color: #ff9800;"></i>
+                                            </span>
+                                            <input type="password" th:field="*{confirmarContrasena}" class="form-control" placeholder="Confirme su contraseña" />
+                                        </div>
+                                        <p th:if="${#fields.hasErrors('confirmarContrasena')}" th:errorclass="text-danger" th:errors="*{confirmarContrasena}"></p>
+                                    </div>
+
+                                    <!-- Botón de Registro -->
+                                    <button class="btn w-100" type="submit" style="background-color: #ff9800; color: #fff;">Continuar</button>
+
+                                    <!-- Enlace a inicio de sesión -->
+                                    <p class="mt-3 text-center">¿Ya estás registrado? <a href="/login" style="color: #ff9800;">Iniciar sesión</a></p>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div th:replace="fragments/footer :: footer"></div>
+        <!-- Scripts de Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+    </body>
+</html>

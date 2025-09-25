@@ -1,0 +1,62 @@
+.menu-section {
+    padding: 3rem 0;
+    background-color: #fff8f3;
+}
+
+.menu-title {
+    font-family: 'Playfair Display', serif;
+    color: #d35400;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.menu-card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.menu-card:hover {
+    transform: translateY(-10px);
+}
+
+.menu-card img {
+    border-radius: 15px 15px 0 0;
+    height: 200px;
+    object-fit: cover;
+}
+
+.menu-card-body {
+    padding: 1.5rem;
+}
+
+.menu-card-title {
+    color: #d35400;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.menu-price {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.menu-btn {
+    background-color: #d35400;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background-color: #a04000;
+    transform: scale(1.05);
+}

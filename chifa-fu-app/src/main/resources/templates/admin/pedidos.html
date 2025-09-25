@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Panel de Pedidos</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/navbar.css}" />
+    </head>
+    <body>
+        <div th:replace="fragments/navbarAdmin :: navbarAdmin"></div>
+        <div class="container mt-5">
+            <h2 class="mb-4">Panel de Pedidos</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Tipo Entrega</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="pedido : ${pedidos}">
+                        <td th:text="${pedido.idPedido}"></td>
+                        <td th:text="${pedido.usuario.nombre + ' ' + pedido.usuario.apellido}"></td>
+                        <td th:text="${#temporals.format(pedido.fechaPedido, 'dd/MM/yyyy HH:mm')}"></td>
+                        <td th:text="${pedido.estado}"></td>
+                        <td th:text="${pedido.tipoEntrega}"></td>
+                        <td th:text="'S/. ' + ${pedido.total}"></td>
+                        <td>
+                            <form th:action="@{/admin/pedido/cambiarEstado}" method="post">
+                                <input type="hidden" name="idPedido" th:value="${pedido.idPedido}" />
+                                <select name="estado" class="form-select form-select-sm">
+                                    <option value="EN_ESPERA" th:selected="${pedido.estado == 'EN_ESPERA'}">En espera</option>
+                                    <option value="EN_PREPARACION" th:selected="${pedido.estado == 'EN_PREPARACION'}">En preparación</option>
+                                    <option value="EN_CAMINO" th:selected="${pedido.estado == 'EN_CAMINO'}">En camino</option>
+                                    <option value="ENTREGADO" th:selected="${pedido.estado == 'ENTREGADO'}">Entregado</option>
+                                </select>
+                                <button type="submit" class="btn btn-success btn-sm mt-2">Actualizar</button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

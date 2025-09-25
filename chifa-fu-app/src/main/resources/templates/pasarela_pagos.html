@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGO</title>
+    <link rel="stylesheet" th:href="@{/pasarela_pago.css}" />
+</head>
+
+<body>
+
+<div class="container">
+    <div class="input-box">
+        <span>Apellido :</span>
+        <div th:text="${usuario.apellido}"></div>
+
+    </div>
+    <form action="">
+        <div class="row">
+            <div class="column">
+                <h3 class="title">Direccion de envio</h3>
+                <div class="input-box">
+                    <span>Nombre :</span>
+                    <input type="text" required>
+                </div>
+
+                <div class="input-box">
+                    <span>Apellido :</span>
+                    <div th:text="${usuario.apellido}"></div>
+
+                </div>
+                <div class="input-box">
+                    <span>Correo :</span>
+                    <input type="email" placeholder="ejemplo@ejemplo.com" required>
+                </div>
+                <div class="input-box">
+                    <span>Direccion :</span>
+                    <input type="text" required>
+                </div>
+
+            </div>
+
+            <div class="column">
+                <h3 class="title">Pago</h3>
+                <div class="input-box">
+                    <span>Tarjetas Aceptadas :</span>
+                    <img src="imgcards.png" alt="">
+                </div>
+                <div class="input-box">
+                    <span>Nombre de la Tarjeta :</span>
+                    <input type="text" placeholder="Michael Reques">
+                </div>
+                <div class="input-box">
+                    <span>Número de la tarjeta :</span>
+                    <input type="number" placeholder="1111 2222 3333 4444">
+                </div>
+                <div class="input-box">
+                    <span>Mes de Exp. :</span>
+                    <input type="text" placeholder="Agosto">
+                </div>
+
+                <div class="flex">
+                    <div class="input-box">
+                        <span>Año de Exp. :</span>
+                        <input type="number" placeholder="2025">
+                    </div>
+                    <div class="input-box">
+                        <span>CVV :</span>
+                        <input type="number" placeholder="123">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">PAGAR</button>
+    </form>
+</div>
+
+</body>
+
+</html>

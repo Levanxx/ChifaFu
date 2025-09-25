@@ -1,0 +1,50 @@
+<header th:fragment="navbarAdmin">
+    <nav class="navbar navbar-expand-lg py-3">
+        <div class="container">
+            <!-- Logo y texto Administrador -->
+            <a class="navbar-brand d-flex align-items-center" th:href="@{/admin/inicio}">
+                <img src="/logo_chifa.png" alt="Logo de Chifa Restaurante" height="30" class="me-2">
+                <span class="fw-bold">      ADMINISTRADOR</span>
+            </a>
+            <!-- Botón móvil resposivo -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin"
+                    aria-controls="navbarAdmin" aria-expanded="false" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Cerrar sesión -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarAdmin">
+                <div sec:authorize="isAuthenticated()">
+                    <button type="button" class="btn btn-danger ms-lg-2" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">
+                        Cerrar Sesión
+                    </button>
+                    <!-- Modal de confirmación -->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="logoutModalLabel">¿Estás seguro?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro que deseas cerrar sesión?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                    <form method="post" th:action="@{/logout}">
+                                        <input type="hidden" th:name="${_csrf.parameterName}"
+                                               th:value="${_csrf.token}" />
+                                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

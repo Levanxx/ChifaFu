@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- CSS NavBar-->
+        <link rel="stylesheet" th:href="@{/navbar.css}" />
+        <!-- CSS footer-->
+        <link rel="stylesheet" th:href="@{/footer.css}" />
+    </head>
+
+    <style>
+        .gradient-custom-2 {
+            /* fallback for old browsers */
+            background: #fccb90;
+            padding: 10px 20px;  /* Ajusta según el diseño */
+            line-height: 1.5;
+
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+        }
+
+        @media (min-width: 768px) {
+            .gradient-form {
+                height: 100vh !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .gradient-custom-2 {
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+            }
+        }
+    </style>
+    <body>
+        <div th:replace="fragments/navbar :: navbar"></div>
+        <section class="h-100 gradient-form" style="background-color: #eee;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-xl-10">
+                        <div class="card rounded-3 text-black">
+                            <div class="row g-0">
+                                <div class="col-lg-6">
+                                    <div class="card-body p-md-5 mx-md-4">
+
+                                        <div class="text-center">
+                                            <a class="navbar-brand d-flex align-items-center" th:href="@{/inicio}">
+                                                <img src="/logo_chifa.png" alt="Logo de Chifa Restaurante" height="30">
+                                            </a>
+
+                                        </div>
+                                        <div th:if="${param.error}"
+                                             class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                                            <strong>Invalid Email or Password</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alter" aria-label="Close">
+                                            </button>
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        <form method="post">
+                                            <br>
+                                            <p>Por favor ingrese su cuenta.</p>
+
+                                            <input type="hidden" th:name="${_csrf.parameterName}"
+                                                   th:value="${_csrf.token}" />
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <label class="form-label" >Correo</label>
+                                                <input type="email"  class="form-control" name="email"/>
+                                            </div>
+
+                                            <div data-mdb-input-init class="form-outline mb-4">
+                                                <label class="form-label" >Contraseña</label>
+                                                <input type="password"  class="form-control" name="contrasena"/>
+                                            </div>
+
+                                            <div class="text-center pt-1 mb-5 pb-1">
+                                                <button data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                        type="submit">Iniciar</button>
+                                                <a class="text-muted" href="#!">¿Olvidaste tu contraseña?</a>
+                                            </div>
+
+                                            <div class="d-flex align-items-center justify-content-center pb-4">
+                                                <p class="mb-0 me-2">¿No tienes cuna cuenta?</p>
+
+                                                <a class="btn btn-register ms-lg-2 mt-3 mt-lg-0" th:href="@{/registro}">
+                                                    <i class="fas fa-user-plus"></i> <span class="d-none d-sm-inline">Registrate</span>
+                                                </a>
+
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                    <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                        <h4 class="mb-4">Chifa Fu</h4>
+                                        <p class="small mb-0">Fusionamos lo mejor de la cocina china y peruana
+                                            para brindarte una experiencia única. Inicia sesión para hacer tus
+                                            pedidos, revisar tu historial o disfrutar de promociones exclusivas
+                                            para clientes registrados.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--<div th:replace="fragments/footer :: footer"></div>-->
+        <div th:insert="~{fragments/footer :: footer}"></div>
+        <!-- Scripts de Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        crossorigin="anonymous"></script>
+    </body>
+</html>

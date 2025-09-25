@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chifa Admin - Panel de Administración</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CSS-->
+    <link rel="stylesheet" th:href="@{/navbar.css}" />
+    <style>
+        .text-orange { color: #ff9800 !important; }
+        .border-orange { border-color: #ff9800 !important; }
+        .form-control:focus, .form-select:focus {
+            border-color: #ff9800;
+            box-shadow: 0 0 0 0.2rem rgba(255,152,0,.25);
+        }
+        .card-header {
+            background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);
+        }
+        .table thead {
+            background-color: #ff8800;
+            color: #fff;
+        }
+        @media (max-width: 991.98px) {
+            .flex-lg-row {
+                flex-direction: column !important;
+            }
+        }
+    </style>
+</head>
+<body style="background: #fff7f0;">
+    <div th:replace="fragments/navbarAdmin :: navbarAdmin"></div>
+
+    <div class="container py-5">
+        <div class="d-flex flex-lg-row flex-column gap-4">
+            <!-- Formulario -->
+            <div class="flex-fill" style="min-width:320px;max-width:450px;">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header text-center">
+                        <h3 class="mb-0 text-white">
+                            <i class="fas fa-store-alt me-2"></i>Registrar Nuevo Local
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form th:action="@{/admin/locales/guardar}" method="post" enctype="multipart/form-data" th:object="${localDto}">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-orange" for="nombre">
+                                    <i class="fas fa-signature me-2 text-orange"></i>Nombre
+                                </label>
+                                <input type="text" th:field="*{nombre}" id="nombre" class="form-control border-orange" placeholder="Nombre" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-orange" for="ubicacion">
+                                    <i class="fas fa-map-marker-alt me-2 text-orange"></i>Ubicación
+                                </label>
+                                <input type="text" th:field="*{ubicacion}" id="ubicacion" class="form-control border-orange" placeholder="Ubicación" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-orange" for="horario">
+                                    <i class="far fa-clock me-2 text-orange"></i>Horario
+                                </label>
+                                <input type="text" th:field="*{horario}" id="horario" class="form-control border-orange" placeholder="Horario" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-orange" for="estado">
+                                    <i class="fas fa-toggle-on me-2 text-orange"></i>Estado
+                                </label>
+                                <select th:field="*{estado}" id="estado" class="form-select border-orange" required>
+                                    <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold text-orange" for="imagen">
+                                    <i class="fas fa-image me-2 text-orange"></i>Imagen
+                                </label>
+                                <input type="file" th:field="*{imagen}" id="imagen" class="form-control border-orange" accept="image/*" required />
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-lg text-white" style="background: linear-gradient(90deg, #ff9800 0%, #ffb74d 100%);">
+                                    <i class="fas fa-save me-2"></i>Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabla -->
+            <div class="flex-fill">
+                <div class="card shadow-lg border-0 h-100">
+                    <div class="card-header text-center">
+                        <h4 class="mb-0 text-white"><i class="bi bi-list-ul me-2"></i>Lista de locales</h4>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle text-center" style="background-color: #fff7f0;">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Ubicacion</th>
+                                        <th>Horario</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="locales : ${locales}">
+                                        <td th:text="${locales.idLocal}"></td>
+                                        <td th:text="${locales.nombre}"></td>
+                                        <td th:text="${locales.ubicacion}"></td>
+                                        <td th:text="${locales.horario}"></td>
+                                        <td th:text="${locales.estado}"></td>
+                                        <td>
+                                            <a class="btn btn-danger btn-sm" th:href="@{'/admin/locales/eliminar?idLocal=' + ${locales.idLocal}}">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                            <button class="btn btn-primary btn-sm">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
